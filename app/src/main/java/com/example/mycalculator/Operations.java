@@ -4,8 +4,9 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 
 /***
+ *  @author Micah Edwards
+ *
  *  This class concerns holding and calculating the values inputted by the user
- * @author Micah Edwards
  */
 public class Operations {
 

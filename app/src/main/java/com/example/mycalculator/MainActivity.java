@@ -1,7 +1,6 @@
 package com.example.mycalculator;
 
 
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +8,11 @@ import android.widget.Button;
 
 import android.widget.TextView;
 
+
+
 /**
  * @author Micah Edwards
- */
-
-
-/**
+ *
  * This class details the action to be performed  when a type of button has been clicked
  */
 class Action {
@@ -55,14 +53,10 @@ class Action {
 
             else
                 textView.append(Character.toString(operator));
-
         }
     }
 
-
 }
-
-
 
 public class MainActivity extends AppCompatActivity {
 
@@ -72,20 +66,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button btn0 = (Button) findViewById(R.id.btn0);
-        Button btn1 = (Button) findViewById(R.id.btn1);
-        Button btn2 = (Button) findViewById(R.id.btn2);
-        Button btn3 = (Button) findViewById(R.id.btn3);
-        Button btn4 = (Button) findViewById(R.id.btn4);
-        Button btn5 = (Button) findViewById(R.id.btn5);
-        Button btn6 = (Button) findViewById(R.id.btn6);
-        Button btn7 = (Button) findViewById(R.id.btn7);
-        Button btn8 = (Button) findViewById(R.id.btn8);
-        Button btn9 = (Button) findViewById(R.id.btn9fix);
-        Button btnAdd = (Button) findViewById(R.id.btnAdd);
-        Button btnMinus = (Button) findViewById(R.id.btnMinus);
-        Button btnMultiply = (Button) findViewById(R.id.btnMultiply);
-        Button btnEquals = (Button) findViewById(R.id.btnEquals);
+        Button btn0 = findViewById(R.id.btn0);
+        Button btn1 = findViewById(R.id.btn1);
+        Button btn2 = findViewById(R.id.btn2);
+        Button btn3 = findViewById(R.id.btn3);
+        Button btn4 = findViewById(R.id.btn4);
+        Button btn5 = findViewById(R.id.btn5);
+        Button btn6 = findViewById(R.id.btn6);
+        Button btn7 = findViewById(R.id.btn7);
+        Button btn8 = findViewById(R.id.btn8);
+        Button btn9 = findViewById(R.id.btn9fix);
+        Button btnAdd = findViewById(R.id.btnAdd);
+        Button btnMinus = findViewById(R.id.btnMinus);
+        Button btnMultiply = findViewById(R.id.btnMultiply);
+        Button btnEquals = findViewById(R.id.btnEquals);
         Button btnDivide = findViewById(R.id.btnDivide);
 
         final Operations op = new Operations();
