@@ -73,15 +73,6 @@ public class Operations {
         StringBuilder result = new StringBuilder();
         int i, a, b, n = stack.size();
 
-        if (stack.size() <= 0) {
-            System.out.println("something went wrong");
-        }
-
-        if (stack.size() >= 9) {
-            System.out.println("something went wrong2");
-        }
-
-
         for (i = 0; i < n; i++)
         {
             a = stack.getFirst();
