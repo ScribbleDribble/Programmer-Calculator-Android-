@@ -1,20 +1,70 @@
 package com.example.mycalculator;
 
 
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import android.widget.EditText;
 import android.widget.TextView;
 
 /**
  * @author Micah Edwards
  */
 
-public class MainActivity extends AppCompatActivity {
 
+/**
+ * This class details the action to be performed  when a type of button has been clicked
+ */
+class Action {
+
+    public static void setUpOperandBtn(Operations operation, TextView textView,  int btn_number)
+    {
+
+        operation.push(btn_number);
+
+        // reset statuses once calculation is finished
+
+        if (operation.getFinishedCalc() || operation.getErrorSignal())
+        {
+            textView.setText("");
+            operation.setFinished(false);
+            operation.setErrorSignal(false);
+        }
+
+        // display text to user
+        textView.append(Integer.toString(btn_number));
+
+    }
+
+    public static void setUpOperatorBtn(Operations operation, TextView textView, char operator)
+    {
+        operation.pushChar(operator);
+        operation.organiseStack();
+
+        if (operation.getErrorSignal())
+        {
+            textView.setText("Syntax error");
+        }
+
+        else{
+
+            if (operator == '/')
+                textView.append("÷");
+
+            else
+                textView.append(Character.toString(operator));
+
+        }
+    }
+
+
+}
+
+
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,247 +88,81 @@ public class MainActivity extends AppCompatActivity {
         Button btnEquals = (Button) findViewById(R.id.btnEquals);
         Button btnDivide = findViewById(R.id.btnDivide);
 
-
-        //each new operation stored in a list
         final Operations op = new Operations();
-
-        // this is a bit of an odd method.
-        // OnClickListener is defined to be an interface. We cannot instantiate this
-        // so we provide implementation on the spot inside the argument
-
         final TextView numtext = findViewById(R.id.numText);
-
-
 
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  {
-
-
-                op.push(0);
-
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-
-                numtext.append("0");
-            }
+            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 0); }
         });
 
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                op.push(1);
-
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-
-                numtext.append("1");
-
-            }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 1); }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  {
-                op.push(2);
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                numtext.append("2");
-
-
-            ;}
+            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 2); }
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                op.push(3);
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                numtext.append("3");
-
-            }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 3); }
         });
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  {
-
-                op.push(4);
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                numtext.append("4");
-
-            }
+            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 4); }
         });
 
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                op.push(5);
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                numtext.append("5");
-
-            }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 5);}
         });
 
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  {
-
-                op.push(6);
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                numtext.append("6");
-
-
-            }
+            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 6); }
         });
 
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                op.push(7);
-                numtext.append("7");
-
-                 }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 7); }
         });
 
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                op.push(8);
-                numtext.append("8");
-
-            }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 8); }
         });
 
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (op.getFinishedCalc() || op.getErrorSignal())
-                {
-                    numtext.setText("");
-                    op.setFinished(false);
-                    op.setErrorSignal(false);
-                }
-                op.push(9);
-                numtext.append("9");
-
-            }
+            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 9); }
 
         });
 
 
         btnMultiply.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-                op.pushChar('x');
-
-                op.organiseStack();
-
-                if (op.getErrorSignal())
-                {
-                    numtext.setText("Syntax error");
-                }
-
-                else
-                    numtext.append("x");
-
-            }
+            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, 'x'); }
         });
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                op.pushChar('+');
-                op.organiseStack();
-
-                if (op.getErrorSignal())
-                {
-                    numtext.setText("Syntax error");
-                }
-
-                else
-                    numtext.append("+");
-
-            }
+            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, '+'); }
         });
 
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                op.pushChar('-');
-                op.organiseStack();
-
-                if (op.getErrorSignal())
-                {
-                    numtext.setText("Syntax error");
-                }
-
-                else
-                    numtext.append("-");
-            }
+            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, '-'); }
 
         });
 
         btnDivide.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                op.pushChar('/');
-                op.organiseStack();
-
-                if (op.getErrorSignal())
-                {
-                    numtext.setText("Syntax error");
-                }
-
-                else
-                    numtext.append("÷");
-
-            }
+                Action.setUpOperatorBtn(op, numtext, '/');}
         });
 
 
@@ -293,11 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
                 numtext.setText("");
                 numtext.append(Double.toString(result));
-
             }
-
-
-
         });
 
     }

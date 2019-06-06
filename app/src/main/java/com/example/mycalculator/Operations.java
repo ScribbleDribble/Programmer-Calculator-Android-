@@ -103,6 +103,7 @@ public class Operations {
         return 1;
     }
 
+    // calculate result based on what operators are in the organsedStack and charStack (operators)
     public double stackCalculate() {
 
         double a = 0, b = 0, result = 0;
