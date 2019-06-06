@@ -29,8 +29,7 @@ public class OperationsTest {
     public void organiseStack() {
 
         Operations opTest = new Operations();
-        Operations opTest2 = new Operations();
-        Operations opTest3 = new Operations();
+
 /*
         for(int i = 0; i < 10; i++)
         {

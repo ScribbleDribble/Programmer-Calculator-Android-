@@ -7,18 +7,15 @@ import android.view.View;
 import android.widget.Button;
 
 import android.widget.EditText;
+import android.widget.TextView;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Deque;
-import java.util.Iterator;
-import java.util.LinkedList;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -40,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnEquals = (Button) findViewById(R.id.btnEquals);
         Button btnDivide = findViewById(R.id.btnDivide);
 
+
         //each new operation stored in a list
         final Operations op = new Operations();
 
@@ -47,9 +45,24 @@ public class MainActivity extends AppCompatActivity {
         // OnClickListener is defined to be an interface. We cannot instantiate this
         // so we provide implementation on the spot inside the argument
 
+        final TextView numtext = findViewById(R.id.numText);
+
+
+
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  { op.push(0); }
+            public void onClick(View view)  {
+                op.push(0);
+
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+
+                numtext.append("0");
+            }
         });
 
         btn1.setOnClickListener(new View.OnClickListener() {
@@ -57,59 +70,160 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 op.push(1);
 
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+
+                numtext.append("1");
+
             }
         });
 
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  { op.push(2); }
+            public void onClick(View view)  {
+                op.push(2);
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                numtext.append("2");
+
+
+            ;}
         });
 
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { op.push(3); }
+            public void onClick(View v) {
+                op.push(3);
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                numtext.append("3");
+
+            }
         });
 
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view)  { op.push(4); }
+            public void onClick(View view)  {
+
+                op.push(4);
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                numtext.append("4");
+
+            }
         });
 
         btn5.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { op.push(5); }
+            public void onClick(View v) {
+                op.push(5);
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                numtext.append("5");
+
+            }
         });
 
         btn6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)  {
+
                 op.push(6);
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                numtext.append("6");
+
+
             }
         });
 
         btn7.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
                 op.push(7);
+                numtext.append("7");
+
                  }
         });
 
         btn8.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { op.push(8); }
+            public void onClick(View v) {
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                op.push(8);
+                numtext.append("8");
+
+            }
         });
 
         btn9.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) { op.push(9); }
+            public void onClick(View v) {
+                if (op.getFinishedCalc() || op.getErrorSignal())
+                {
+                    numtext.setText("");
+                    op.setFinished(false);
+                    op.setErrorSignal(false);
+                }
+                op.push(9);
+                numtext.append("9");
+
+            }
 
         });
+
 
         btnMultiply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 op.pushChar('x');
+
                 op.organiseStack();
+
+                if (op.getErrorSignal())
+                {
+                    numtext.setText("Syntax error");
+                }
+
+                else
+                    numtext.append("x");
+
             }
         });
 
@@ -119,6 +233,14 @@ public class MainActivity extends AppCompatActivity {
                 op.pushChar('+');
                 op.organiseStack();
 
+                if (op.getErrorSignal())
+                {
+                    numtext.setText("Syntax error");
+                }
+
+                else
+                    numtext.append("+");
+
             }
         });
 
@@ -127,6 +249,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 op.pushChar('-');
                 op.organiseStack();
+
+                if (op.getErrorSignal())
+                {
+                    numtext.setText("Syntax error");
+                }
+
+                else
+                    numtext.append("-");
             }
 
         });
@@ -137,6 +267,14 @@ public class MainActivity extends AppCompatActivity {
                 op.pushChar('/');
                 op.organiseStack();
 
+                if (op.getErrorSignal())
+                {
+                    numtext.setText("Syntax error");
+                }
+
+                else
+                    numtext.append("÷");
+
             }
         });
 
@@ -144,9 +282,20 @@ public class MainActivity extends AppCompatActivity {
         btnEquals.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                double result;
+
                 op.organiseStack();
-                System.out.println(op.stackCalculate());
+                result = op.stackCalculate();
+
+                numtext.setText("");
+                numtext.append(Double.toString(result));
+
             }
+
+
+
         });
+
     }
 }

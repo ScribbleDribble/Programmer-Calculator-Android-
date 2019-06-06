@@ -8,12 +8,19 @@ import java.util.Deque;
  */
 public class Operations {
 
+    // stack holds all the values of a number to be concatenated e.g [4,5,2] to make 452
     private Deque<Integer> stack = new ArrayDeque<>();
+
+    // this stack will hold all values to be used in calculation e.g 452
     private Deque<Double> organisedStack = new ArrayDeque<>();
+
+    // holds all operators to be used in calculation.
     private Deque<Character> charStack = new ArrayDeque<>();
 
+    private boolean finished_calculation = false;
     // this may be used for an ANS button
-    private double previous_result;
+    private double previous_result = 0;
+    private boolean signal_syntax_error = false;
 
     public Operations() {
 
@@ -36,6 +43,18 @@ public class Operations {
         return organisedStack.getFirst();
     }
 
+    public boolean getErrorSignal() { return signal_syntax_error; }
+
+    public boolean getFinishedCalc() { return finished_calculation; }
+
+    public double getAns() { return previous_result; }
+
+
+    public void setFinished(boolean a) { finished_calculation = a; }
+
+    public void setErrorSignal(boolean a) { signal_syntax_error = false; }
+
+
     public double sum() {
         double result = 0;
 
@@ -53,8 +72,6 @@ public class Operations {
 
         StringBuilder result = new StringBuilder();
         int i, a, b, n = stack.size();
-
-
 
         if (stack.size() <= 0) {
             System.out.println("something went wrong");
@@ -75,10 +92,21 @@ public class Operations {
         // we have been appending values from right to left, so reverse
         result = result.reverse();
 
-        b = Integer.parseInt(result.toString());
-        System.out.println((double) b);
-        organisedStack.push((double) b);
-        stack.clear();
+
+        try {
+            b = Integer.parseInt(result.toString());
+            organisedStack.push((double) b);
+            stack.clear();
+        }
+
+        catch( Exception error) {
+            signal_syntax_error = true;
+            stack.clear();
+            organisedStack.clear();
+            charStack.clear();
+
+            return -1;
+        }
 
         return 1;
     }
@@ -88,63 +116,65 @@ public class Operations {
         double a = 0, b = 0, result = 0;
         char operator;
 
-        // generally, there should be n-1 operators in the stack, where n is the number of operands
-        if (charStack.size() >= organisedStack.size())
-        {
-            // *** under construction *** must display this on UI level rather than terminal
-            System.out.println("Syntax error");
-            return 0.0;
-        }
 
-        int n = charStack.size();
+        try {
 
-        for(int i = 0; i < n; i++)
-        {
+            int n = charStack.size();
 
-            a = organisedStack.getLast();
-            organisedStack.removeLast();
-            b = organisedStack.getLast();
-            organisedStack.removeLast();
+            for (int i = 0; i < n; i++) {
+
+                a = organisedStack.getLast();
+                organisedStack.removeLast();
+                b = organisedStack.getLast();
+                organisedStack.removeLast();
 
 
-            if ( a != 0 && b != 0 )
-            {
-                operator = charStack.getLast();
+                if (a != 0 && b != 0) {
+                    operator = charStack.getLast();
 
-                switch(operator)    {
+                    switch (operator) {
 
-                    case '+':
-                        result =  a + b;
-                        break;
+                        case '+':
+                            result = a + b;
+                            break;
 
-                    case '-':
-                        result = a - b;
-                        break;
+                        case '-':
+                            result = a - b;
+                            break;
 
-                    case 'x':
-                        result =  a * b;
-                        break;
+                        case 'x':
+                            result = a * b;
+                            break;
 
-                    case '/':
-                        result =  a / b;
-                        break;
+                        case '/':
+                            result = a / b;
+                            break;
 
+                    }
+                    // pop involved operands and operators off the stack
+                    charStack.removeLast();
+
+                    organisedStack.addLast(result);
+
+                    a = 0;
+                    b = 0;
                 }
-                // pop involved operands and operators off the stack
-                charStack.removeLast();
-
-                organisedStack.addLast(result);
-
-                a = 0;
-                b = 0;
             }
+
+            result = sum();
+
+            previous_result = result;
+            finished_calculation = true;
+
+            return result;
+
         }
 
-        result = sum();
+        catch (Exception error) {
+            signal_syntax_error = true;
+            return 0;
+        }
 
-        previous_result = result;
-
-        return result;
     }
 
 
