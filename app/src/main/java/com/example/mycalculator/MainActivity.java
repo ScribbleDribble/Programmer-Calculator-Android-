@@ -19,8 +19,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //(Button) casts    to find something in the layout you will use findViewById
-        // R is your resource obj and then another separator to allow you to use id then property
         Button btn0 = (Button) findViewById(R.id.btn0);
         Button btn1 = (Button) findViewById(R.id.btn1);
         Button btn2 = (Button) findViewById(R.id.btn2);
@@ -52,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
         btn0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)  {
+
+
                 op.push(0);
 
                 if (op.getFinishedCalc() || op.getErrorSignal())
