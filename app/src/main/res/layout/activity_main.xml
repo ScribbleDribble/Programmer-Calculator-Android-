@@ -243,16 +243,19 @@
         android:id="@+id/btnGCD"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
         android:text="@string/gcd"
-        tools:layout_editor_absoluteX="227dp"
-        tools:layout_editor_absoluteY="355dp" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnXor"
+        app:layout_constraintEnd_toStartOf="@+id/btnXor" />
 
     <Button
         android:id="@+id/btnC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="17dp"
         android:text="@string/clear"
-        tools:layout_editor_absoluteX="123dp"
-        tools:layout_editor_absoluteY="666dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/btn2" />
 
 </android.support.constraint.ConstraintLayout>

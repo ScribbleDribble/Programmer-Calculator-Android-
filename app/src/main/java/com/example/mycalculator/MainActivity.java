@@ -76,17 +76,20 @@ public class MainActivity extends AppCompatActivity {
         Button btn7 = findViewById(R.id.btn7);
         Button btn8 = findViewById(R.id.btn8);
         Button btn9 = findViewById(R.id.btn9fix);
+
         Button btnAdd = findViewById(R.id.btnAdd);
         Button btnMinus = findViewById(R.id.btnMinus);
         Button btnMultiply = findViewById(R.id.btnMultiply);
         Button btnEquals = findViewById(R.id.btnEquals);
         Button btnDivide = findViewById(R.id.btnDivide);
+
         Button btnGCD = findViewById(R.id.btnGCD);
         Button btnAnd = findViewById(R.id.btnAnd);
         Button btnOr = findViewById(R.id.btnOR);
         Button btnNot = findViewById(R.id.btnNot);
         Button btnXor = findViewById(R.id.btnXor);
 
+        Button btnC = findViewById(R.id.btnC);
 
         final Operations op = new Operations();
         final TextView numtext = findViewById(R.id.numText);
@@ -210,6 +213,16 @@ public class MainActivity extends AppCompatActivity {
 
                 numtext.setText("");
                 numtext.append(Double.toString(result));
+            }
+        });
+
+        btnC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                op.clearAll();
+                numtext.setText("");
+
             }
         });
 

@@ -53,6 +53,14 @@ public class Operations {
 
     public double getAns() { return previous_result; }
 
+    // resets all memory in calculator
+    public void clearAll() {
+
+        charStack.clear();
+        stack.clear();
+        organisedStack.clear();
+        containsNot = false;
+    }
 
     public void setFinished(boolean a) { finished_calculation = a; }
 
