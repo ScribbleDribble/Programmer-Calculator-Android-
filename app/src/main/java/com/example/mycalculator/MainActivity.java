@@ -51,6 +51,9 @@ class Action {
             if (operator == '/')
                 textView.append("÷");
 
+            else if (operator == '%')
+                textView.append(" MOD ");
+
             else
                 textView.append(Character.toString(operator));
         }
@@ -88,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         Button btnOr = findViewById(R.id.btnOR);
         Button btnNot = findViewById(R.id.btnNot);
         Button btnXor = findViewById(R.id.btnXor);
+        Button btnMod = findViewById(R.id.btnMod);
 
         Button btnC = findViewById(R.id.btnC);
 
@@ -213,6 +217,13 @@ public class MainActivity extends AppCompatActivity {
 
                 numtext.setText("");
                 numtext.append(Double.toString(result));
+            }
+        });
+
+        btnMod.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Action.setUpOperatorBtn(op, numtext, '%');
             }
         });
 

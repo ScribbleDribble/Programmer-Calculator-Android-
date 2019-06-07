@@ -192,12 +192,12 @@ public class Operations {
                             result = (int) a | (int)b;
                             break;
 
-                        case 'n':
-                            result = -a - 1 + b;
-                            break;
-
                         case '^':
                             result = (int)a ^ (int)b;
+                            break;
+
+                        case '%':
+                            result = (int)a % (int)b;
                             break;
 
                     }
