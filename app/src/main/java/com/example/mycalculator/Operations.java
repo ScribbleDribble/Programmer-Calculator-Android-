@@ -19,6 +19,8 @@ public class Operations {
     // holds all operators to be used in calculation.
     private Deque<Character> charStack = new ArrayDeque<>();
 
+    private boolean containsNot = false;
+
     private boolean finished_calculation = false;
     // this may be used for an ANS button
     private double previous_result = 0;
@@ -56,6 +58,22 @@ public class Operations {
 
     public void setErrorSignal(boolean a) { signal_syntax_error = false; }
 
+    public void setContainsNot() { containsNot = true; }
+
+    public static int gcd(int a, int b) {
+
+        if (b == 0)
+        {
+            return a;
+        }
+
+        return gcd(b, a % b);
+    }
+
+    public static int not(int a) {
+        return -a -1;
+    }
+
 
     public double sum() {
         double result = 0;
@@ -88,7 +106,17 @@ public class Operations {
 
         try {
             b = Integer.parseInt(result.toString());
-            organisedStack.push((double) b);
+            if (containsNot)
+            {
+                organisedStack.push((double) -b - 1);
+                containsNot = false;
+            }
+
+            else
+            {
+                organisedStack.push((double) b);
+            }
+
             stack.clear();
         }
 
@@ -142,6 +170,26 @@ public class Operations {
 
                         case '/':
                             result = a / b;
+                            break;
+
+                        case 'g' :
+                            result = gcd((int)a, (int)b);
+                            break;
+
+                        case '&':
+                            result = (int)a & (int)b;
+                            break;
+
+                        case '|':
+                            result = (int) a | (int)b;
+                            break;
+
+                        case 'n':
+                            result = -a - 1 + b;
+                            break;
+
+                        case '^':
+                            result = (int)a ^ (int)b;
                             break;
 
                     }

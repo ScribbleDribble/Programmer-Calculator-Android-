@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnMultiply = findViewById(R.id.btnMultiply);
         Button btnEquals = findViewById(R.id.btnEquals);
         Button btnDivide = findViewById(R.id.btnDivide);
+        Button btnGCD = findViewById(R.id.btnGCD);
+        Button btnAnd = findViewById(R.id.btnAnd);
+        Button btnOr = findViewById(R.id.btnOR);
+        Button btnNot = findViewById(R.id.btnNot);
+        Button btnXor = findViewById(R.id.btnXor);
+
 
         final Operations op = new Operations();
         final TextView numtext = findViewById(R.id.numText);
@@ -159,6 +165,39 @@ public class MainActivity extends AppCompatActivity {
                 Action.setUpOperatorBtn(op, numtext, '/');}
         });
 
+        btnGCD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Action.setUpOperatorBtn(op, numtext, 'g');}
+        });
+
+        btnAnd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Action.setUpOperatorBtn(op, numtext, '&');}
+        });
+
+        btnOr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Action.setUpOperatorBtn(op, numtext, '|');}
+        });
+
+        btnNot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                op.setContainsNot();
+                numtext.append("NOT");
+
+            }
+        });
+
+        btnXor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Action.setUpOperatorBtn(op, numtext, '^');}
+        });
 
         btnEquals.setOnClickListener(new View.OnClickListener() {
             @Override

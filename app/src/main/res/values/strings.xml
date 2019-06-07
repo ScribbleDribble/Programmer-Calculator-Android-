@@ -17,6 +17,13 @@
     <string name="divide">÷</string>
     <string name="a9">9</string>
     <string name="ans">ANS</string>
+    <string name="btnMod" >Mod</string>
+    <string name="and">AND</string>
+    <string name="or">OR</string>
+    <string name="btnNot">Not</string>
+    <string name="xor">XOR</string>
+    <string name="gcd">GCD</string>
+    <string name="clear">C</string>
 
 
 </resources>

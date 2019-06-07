@@ -25,11 +25,12 @@
         android:layout_height="124dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="123dp"
+        android:layout_marginTop="68dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="#3F51B5"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -188,5 +189,70 @@
         android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnMod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="11dp"
+        android:text="@string/btnMod"
+        app:layout_constraintBottom_toTopOf="@+id/btnMultiply"
+        app:layout_constraintStart_toStartOf="@+id/btnMultiply" />
+
+    <Button
+        android:id="@+id/btnAnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="2dp"
+        android:layout_marginRight="2dp"
+        android:text="@string/and"
+        app:layout_constraintEnd_toStartOf="@+id/btnMod"
+        app:layout_constraintTop_toTopOf="@+id/btnMod" />
+
+    <Button
+        android:id="@+id/btnOR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnAnd"
+        app:layout_constraintStart_toStartOf="@+id/btn8" />
+
+    <Button
+        android:id="@+id/btnNot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/btnNot"
+        app:layout_constraintBottom_toTopOf="@+id/btn7"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnXor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="12dp"
+        android:text="@string/xor"
+        app:layout_constraintBottom_toTopOf="@+id/btnMod"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnGCD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gcd"
+        tools:layout_editor_absoluteX="227dp"
+        tools:layout_editor_absoluteY="355dp" />
+
+    <Button
+        android:id="@+id/btnC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/clear"
+        tools:layout_editor_absoluteX="123dp"
+        tools:layout_editor_absoluteY="666dp" />
 
 </android.support.constraint.ConstraintLayout>
