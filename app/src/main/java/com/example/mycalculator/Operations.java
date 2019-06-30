@@ -68,6 +68,12 @@ public class Operations {
 
     public void setContainsNot() { containsNot = true; }
 
+    public boolean stack_isEmpty() {
+
+        return stack.isEmpty();
+
+    }
+
     public static int gcd(int a, int b) {
 
         if (b == 0)
@@ -159,7 +165,7 @@ public class Operations {
                 organisedStack.removeLast();
 
 
-                if (a != 0 && b != 0) {
+
                     operator = charStack.getLast();
 
                     switch (operator) {
@@ -208,7 +214,7 @@ public class Operations {
 
                     a = 0;
                     b = 0;
-                }
+
             }
 
             result = sum();

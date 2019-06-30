@@ -39,6 +39,13 @@ class Action {
     public static void setUpOperatorBtn(Operations operation, TextView textView, char operator)
     {
         operation.pushChar(operator);
+
+        if (operation.stack_isEmpty() )
+        {
+            operation.push(0);
+            //textView.append("0");
+        }
+
         operation.organiseStack();
 
         if (operation.getErrorSignal())
@@ -58,7 +65,6 @@ class Action {
                 textView.append(Character.toString(operator));
         }
     }
-
 }
 
 public class MainActivity extends AppCompatActivity {
@@ -98,144 +104,56 @@ public class MainActivity extends AppCompatActivity {
         final Operations op = new Operations();
         final TextView numtext = findViewById(R.id.numText);
 
-        btn0.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 0); }
+
+        btn0.setOnClickListener(v -> { Action.setUpOperandBtn(op, numtext, 0);});
+
+        btn1.setOnClickListener( v -> { Action.setUpOperandBtn(op, numtext, 1);});
+
+        btn2.setOnClickListener(v -> {Action.setUpOperandBtn(op, numtext, 2);});
+
+        btn3.setOnClickListener(v -> { Action.setUpOperandBtn(op,  numtext, 3);});
+
+        btn4.setOnClickListener(v -> { Action.setUpOperandBtn(op, numtext, 4);});
+
+        btn5.setOnClickListener(v -> { Action.setUpOperandBtn(op, numtext, 5);});
+
+        btn6.setOnClickListener(v -> {Action.setUpOperandBtn(op, numtext, 6);});
+
+        btn7.setOnClickListener(v -> Action.setUpOperandBtn(op, numtext, 7));
+
+        btn8.setOnClickListener(v -> { Action.setUpOperandBtn(op, numtext, 8);});
+
+        btn9.setOnClickListener(v -> { Action.setUpOperandBtn(op, numtext, 9);});
+
+        btnMultiply.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, 'x');});
+
+        btnAdd.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '+');});
+
+        btnMinus.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '-');});
+
+        btnDivide.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '/');});
+
+        btnGCD.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, 'g');});
+
+        btnAnd.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '&');});
+
+        btnOr.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '|');});
+
+        btnNot.setOnClickListener(v -> { op.setContainsNot(); numtext.append("NOT");});
+
+        btnXor.setOnClickListener(v -> { Action.setUpOperatorBtn(op, numtext, '^');});
+
+        btnEquals.setOnClickListener(v -> { double result;
+            op.organiseStack();
+            result = op.stackCalculate();
+
+            numtext.setText("");
+            numtext.append(Double.toString(result));
         });
 
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 1); }
-        });
+        btnMod.setOnClickListener(v -> {Action.setUpOperatorBtn(op, numtext, '%');});
 
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 2); }
-        });
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 3); }
-        });
-
-        btn4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 4); }
-        });
-
-        btn5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 5);}
-        });
-
-        btn6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)  { Action.setUpOperandBtn(op, numtext, 6); }
-        });
-
-        btn7.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 7); }
-        });
-
-        btn8.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 8); }
-        });
-
-        btn9.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperandBtn(op, numtext, 9); }
-
-        });
-
-
-        btnMultiply.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, 'x'); }
-        });
-
-        btnAdd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, '+'); }
-        });
-
-        btnMinus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { Action.setUpOperatorBtn(op, numtext, '-'); }
-
-        });
-
-        btnDivide.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, '/');}
-        });
-
-        btnGCD.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, 'g');}
-        });
-
-        btnAnd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, '&');}
-        });
-
-        btnOr.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, '|');}
-        });
-
-        btnNot.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                op.setContainsNot();
-                numtext.append("NOT");
-
-            }
-        });
-
-        btnXor.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, '^');}
-        });
-
-        btnEquals.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                double result;
-
-                op.organiseStack();
-                result = op.stackCalculate();
-
-                numtext.setText("");
-                numtext.append(Double.toString(result));
-            }
-        });
-
-        btnMod.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Action.setUpOperatorBtn(op, numtext, '%');
-            }
-        });
-
-        btnC.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                op.clearAll();
-                numtext.setText("");
-
-            }
-        });
-
+        btnC.setOnClickListener(v -> {op.clearAll();
+                                numtext.setText("");});
     }
 }
